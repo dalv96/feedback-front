@@ -119,6 +119,11 @@
         </v-card>
       </v-dialog>
     </v-layout>
+    <v-footer class="my-foot pa-3">
+     <a href="/logout">Выйти</a>
+     <v-spacer></v-spacer>
+     <div>ООО "Миранда-медиа" &copy; {{ new Date().getFullYear() }}</div>
+   </v-footer>
   </v-app>
 </template>
 

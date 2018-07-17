@@ -11,7 +11,7 @@
                   <v-spacer></v-spacer>
                 </v-toolbar>
                 <v-card-text>
-                  <v-form>
+                  <v-form @submit.prevent="signIn">
                     <v-text-field name="login" label="Логин" v-model="login" type="text"></v-text-field>
                     <v-text-field
                       name="password"
