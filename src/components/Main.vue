@@ -120,8 +120,8 @@
       </v-dialog>
     </v-layout>
     <v-footer class="my-foot pa-3">
-     <!-- <div class="profile">{{ feedback.author }}</div> -->
-     <div class="profile">Сергей Петров Васиьлев</div>
+     <div class="profile">{{ feedback.author }}</div>
+     <!-- <div class="profile">Сергей Петров Васиьлев</div> -->
      <v-spacer></v-spacer>
      <a @click="logout">Выйти</a>
      <!-- <div>ООО "Миранда-медиа" &copy; {{ new Date().getFullYear() }}</div> -->
@@ -204,6 +204,7 @@ export default {
       this.e1++
       if (this.e1 > 3) {
         this.showHeader = false
+        this.sendFeedback()
       }
     },
     skipText: function () {
