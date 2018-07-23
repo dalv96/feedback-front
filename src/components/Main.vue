@@ -120,9 +120,11 @@
       </v-dialog>
     </v-layout>
     <v-footer class="my-foot pa-3">
-     <a href="/logout">Выйти</a>
+     <!-- <div class="profile">{{ feedback.author }}</div> -->
+     <div class="profile">Сергей Петров Васиьлев</div>
      <v-spacer></v-spacer>
-     <div>ООО "Миранда-медиа" &copy; {{ new Date().getFullYear() }}</div>
+     <a @click="logout">Выйти</a>
+     <!-- <div>ООО "Миранда-медиа" &copy; {{ new Date().getFullYear() }}</div> -->
    </v-footer>
   </v-app>
 </template>
@@ -143,6 +145,7 @@ export default {
       msg: '',
       reason: '',
       feedback: {
+        author: this.$cookies.get('user_name'),
         q1: '',
         q2: '',
         q3: '',
@@ -152,7 +155,16 @@ export default {
       }
     }
   },
+  created: function () {
+    var isLogIn = this.$cookies.isKey('user_name')
+
+    if (!isLogIn) this.$router.push('/login')
+  },
   methods: {
+    logout: function () {
+      this.$cookies.remove('user_name')
+      this.$router.push('/login')
+    },
     firstQ: function (v) {
       this.feedback.q1 = v
       if (v === -1) {
@@ -211,6 +223,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.profile
+{
+  margin-right: 1em;
+  font-size: 12pt;
+  line-height: 14pt;
+}
 .contetn
 {
   height: 100%;

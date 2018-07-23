@@ -67,17 +67,24 @@ export default {
       snackbar: false
     }
   },
+  created: function () {
+    var isLogIn = this.$cookies.isKey('user_name')
+
+    if (isLogIn) this.$router.push('/')
+  },
   methods: {
     async signIn () {
       try {
         var res = await Auth.login({
-          login: this.login,
+          username: this.login,
           password: this.password
         })
         if (res.data.error) {
           this.error = 'Логин или пароль введены неверно!'
           this.snackbar = true
         } else {
+          this.$cookies.set('user_login', this.login, '7d')
+          this.$cookies.set('user_name', res.data.sAMAccountName, '7d')
           this.$router.push('/')
         }
       } catch (error) {
