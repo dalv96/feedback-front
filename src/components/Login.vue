@@ -83,8 +83,8 @@ export default {
           this.error = 'Логин или пароль введены неверно!'
           this.snackbar = true
         } else {
-          this.$cookies.set('user_login', this.login, '7d')
-          this.$cookies.set('user_name', res.data.sAMAccountName, '7d')
+          this.$cookies.set('user_login', this.sAMAccountName, '7d')
+          this.$cookies.set('user_name', res.data.cn, '7d')
           this.$router.push('/')
         }
       } catch (error) {
