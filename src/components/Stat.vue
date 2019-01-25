@@ -8,6 +8,7 @@
            color="purple"
         ></v-progress-circular>
       </v-layout>
+      <a style="font-family: sans-serif; position: absolute; top: 20px; margin-left: 20px; font-size: 18px;" href="http://10.240.240.40:3030/excel" target="__blank">Выгрузить в Excel</a>
       <v-layout v-show="!loading" align-center justify-center>
         <v-data-table
             :headers="headers"
