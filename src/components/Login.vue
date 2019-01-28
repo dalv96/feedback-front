@@ -68,9 +68,10 @@ export default {
     }
   },
   created: function () {
-    var isLogIn = this.$cookies.isKey('user_name')
+    const isLogIn = this.$cookies.isKey('user_name')
+    const isDepartmentOk = this.$cookies.isKey('user_department')
 
-    if (isLogIn) this.$router.push('/')
+    if (isLogIn && isDepartmentOk) this.$router.push('/')
   },
   methods: {
     async signIn () {
@@ -85,6 +86,7 @@ export default {
         } else {
           this.$cookies.set('user_login', this.sAMAccountName, '7d')
           this.$cookies.set('user_name', res.data.cn, '7d')
+          this.$cookies.set('user_department', res.data.department, '7d')
           this.$router.push('/')
         }
       } catch (error) {

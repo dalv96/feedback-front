@@ -146,6 +146,7 @@ export default {
       reason: '',
       feedback: {
         author: this.$cookies.get('user_name'),
+        department: this.$cookies.get('user_department'),
         q1: '',
         q2: '',
         q3: '',
@@ -156,9 +157,10 @@ export default {
     }
   },
   created: function () {
-    var isLogIn = this.$cookies.isKey('user_name')
+    const isLogIn = this.$cookies.isKey('user_name')
+    const isDepartmentOk = this.$cookies.isKey('user_department')
 
-    if (!isLogIn) this.$router.push('/login')
+    if (!isLogIn || !isDepartmentOk) this.$router.push('/login')
   },
   methods: {
     logout: function () {
