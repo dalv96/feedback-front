@@ -86,13 +86,22 @@ export default {
         } else {
           this.$cookies.set('user_login', this.sAMAccountName, '7d')
           this.$cookies.set('user_name', res.data.cn, '7d')
-          this.$cookies.set('user_department', res.data.department, '7d')
+          const depart = this.getGus(res.data.department)
+          this.$cookies.set('user_department', depart, '7d')
           this.$router.push('/')
         }
       } catch (error) {
         this.error = 'Что-то пошло не так :('
         this.snackbar = true
       }
+    },
+    getGus (str) {
+      if (str.length >= 40) {
+        if (str.substr(0, 3) === 'ГУС') {
+          return str.substring(0, str.length - 32)
+        }
+      }
+      return str
     }
   }
 }
