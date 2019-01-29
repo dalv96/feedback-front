@@ -81,6 +81,7 @@
               <template slot="items" slot-scope="props">
                 <td>{{ props.item.author }}</td>
                 <td>{{ props.item.department }}</td>
+                <td>{{ props.item.date.substr(0, 10) }}</td>
                 <td>{{ (props.item.q1 == 1)?'Хорошо':(props.item.q1 == -1)?'Плохо':'Удовлетворительно' }}</td>
                 <td>{{ (props.item.q1 == 1)?'Да':(props.item.q1 == -1)?'Пришлось обращаться снова':'Нет'  }}</td>
                 <td>{{ props.item.q3 }}</td>
@@ -111,6 +112,7 @@ export default {
           align: 'left',
           value: 'department'
         },
+        { text: 'Дата', value: 'date', width: '120px' },
         { text: 'Первый вопрос', value: 'q1' },
         { text: 'Второй вопрос', value: 'q2' },
         { text: 'Третий вопрос', value: 'q3' }
