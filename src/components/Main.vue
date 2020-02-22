@@ -56,19 +56,9 @@
                    :max="max"
                    :min="min"
                    persistent-hint
+                   thumb-label="always"
                    hint="Оцените от 0 до 10, где 0 – точно не порекомендую, а 10 – точно порекомендую."
                  ></v-slider>
-               </v-flex>
-               <v-flex shrink style="width: 60px">
-                 <v-text-field
-                   v-model="slider"
-                   class="mt-0"
-                   hide-details
-                   single-line
-                   :max="max"
-                   :min="min"
-                   type="number"
-                 ></v-text-field>
                </v-flex>
              </v-layout>
              <v-btn large round color="mybtn success" @click="thirdQ()">Сохранить</v-btn>
@@ -118,7 +108,22 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+      <v-snackbar
+        v-model="snackbar"
+        color="error"
+        multi-line="multi-line"
+      >
+      {{ error }}
+      <v-btn
+        dark
+        flat
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+      </v-snackbar>
     </v-layout>
+
     <v-footer class="my-foot pa-3">
      <div class="profile">{{ feedback.author }}</div>
      <!-- <div class="profile">Сергей Петров Васиьлев</div> -->
@@ -153,7 +158,9 @@ export default {
         text1: '',
         text2: '',
         text3: ''
-      }
+      },
+      error: '',
+      snackbar: false
     }
   },
   created: function () {
@@ -218,7 +225,15 @@ export default {
       }
     },
     sendFeedback: function () {
-      Feedback.create(this.feedback)
+      Feedback
+        .create(this.feedback)
+        .then(() => { window.location = '/' })
+        .catch(error => {
+          this.error = 'Что-то пошло не так :('
+          this.snackbar = true
+
+          throw error
+        })
     }
   }
 }
