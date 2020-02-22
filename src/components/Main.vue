@@ -227,7 +227,7 @@ export default {
     sendFeedback: function () {
       Feedback
         .create(this.feedback)
-        .then(() => { window.location = '/' })
+        .then(() => setTimeout(() => { window.location = '/' }, 1000))
         .catch(error => {
           this.error = 'Что-то пошло не так :('
           this.snackbar = true
